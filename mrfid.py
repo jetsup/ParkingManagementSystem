@@ -1,12 +1,14 @@
 from machine import SPI
-from libs.mfrc522 import MFRC522
+from mfrc522 import MFRC522
 
 
-class RFID:
+class RFID(MFRC522):
     def __init__(self, spi: SPI, rst_pin: int, sda_pin: int) -> None:
+        # super(RFID, self).__init__(spi, rst_pin, sda_pin)
         self.rfid = MFRC522(spi, rst_pin, sda_pin)
 
-    def read(self):
+
+    def read_data(self):
         uid = ""
         (stat, tag_type) = self.rfid.request(self.rfid.REQIDL)
         if stat == self.rfid.OK:
