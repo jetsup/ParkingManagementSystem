@@ -5,4 +5,6 @@ from hcsr04 import HCSR04
 class HCSR(HCSR04):
     def __init__(self, trigger_pin, echo_pin, echo_timeout_us=500 * 2 * 30):
         super().__init__(trigger_pin, echo_pin, echo_timeout_us)
-    pass
+
+    def object_detected(self, distance: int = 5) -> bool:
+        return self.distance_cm() <= distance
